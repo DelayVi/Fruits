@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fruitboard"
+    app:startDestination="@id/fruitboardFragment">
+
+    <fragment
+        android:id="@+id/fruitboardFragment"
+        android:name="ru.delayvi.fruits.ui.main.tabs.fruitboard.FruitboardFragment"
+        android:label="fragment_fruitboard"
+        tools:layout="@layout/fragment_fruitboard" >
+        <action
+            android:id="@+id/action_fruitboardFragment_to_fruitFragment"
+            app:destination="@id/fruitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fruitFragment"
+        android:name="ru.delayvi.fruits.ui.main.tabs.fruitboard.FruitFragment"
+        android:label="fragment_fruit"
+        tools:layout="@layout/fragment_fruit" >
+        <argument
+            android:name="fruitId"
+            app:argType="long" />
+        <argument
+            android:name="fruitName"
+            app:argType="string" />
+    </fragment>
+</navigation>

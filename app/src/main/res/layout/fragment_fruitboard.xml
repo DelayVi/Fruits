@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.tabs.fruitboard.FruitboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fruitsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="pinkButton,
+             redButton,
+             greenButton,
+             yellowButton,
+             orangeButton,
+             purpleButton"
+            app:flow_horizontalGap="@dimen/medium_space"
+            app:flow_horizontalStyle="packed"
+            app:flow_verticalGap="@dimen/medium_space"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- This is an example, real items are derived from the model: -->
+        <Button
+            android:id="@+id/pinkButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/pink"
+            android:text="1"/>
+        <Button
+            android:id="@+id/redButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/red"
+            android:text="2"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/greenButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/green"
+            android:text="3"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/yellowButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/yellow"
+            android:text="4"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/orangeButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/orange"
+            android:text="5"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/purpleButton"
+            style="@style/DefaultFruitButtonItemStyle"
+            android:backgroundTint="@color/purple"
+            android:text="6"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/noBoxesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_fruits"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</FrameLayout>
