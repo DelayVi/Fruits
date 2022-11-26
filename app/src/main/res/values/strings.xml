@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Fruits</string>
+    <string name="please_wait">Пожалуйста подождите, идёт загрузка...</string>
+    <string name="this_is_fruit">Это фрукт...</string>
+    <string name="go_back">Назад</string>
+    <string name="show_nutrients">Показать калорийность</string>
+    <string name="no_fruits">Ни одного фрукта не выбрано</string>
+    <string name="edit_profile_description">Введите новое имя пользователя</string>
+    <string name="field_username">Имя пользователя</string>
+    <string name="to_save">Сохранить</string>
+    <string name="to_cancel">Отменить</string>
+    <string name="field_created_at">Зарегистрирован</string>
+    <string name="field_email">Email</string>
+    <string name="action_edit_profile">Изменить имя пользователя</string>
+    <string name="action_logout">Выйти</string>
+    <string name="profile_title_hint">Добрый день</string>
+    <string name="settings_description">Вы можете убрать любой фрукт</string>
+    <string name="field_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_up">Зарегистрироваться</string>
+    <string name="field_repeat_password">Повторите пароль</string>
+    <string name="fruitboard">Фрукты</string>
+    <string name="settings">Настройки</string>
+    <string name="profile">Профиль</string>
 </resources>

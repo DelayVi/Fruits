@@ -8,6 +8,8 @@ interface FruitsRepository {
 
     suspend fun getFruitsSettings(onlyActive: Boolean = false): StateFlow<List<FruitSettings>>
 
+    suspend fun getFruitById(id: Long): Fruit
+
     suspend fun activateFruit(fruit: Fruit)
 
     suspend fun deactivateFruit(fruit: Fruit)

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@id/fruitboard"
+        android:title="@string/fruitboard"
+        android:icon="@drawable/ic_fruitboard"/>
+    <item android:id="@id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings" />
+    <item android:id="@id/profile"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_profile"/>
+
+</menu>
