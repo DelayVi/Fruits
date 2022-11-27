@@ -1,5 +1,6 @@
 package ru.delayvi.fruits.domain.accounts
 
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import ru.delayvi.fruits.domain.accounts.entity.Account
 import ru.delayvi.fruits.domain.accounts.entity.SignUpData
@@ -17,4 +18,6 @@ interface AccountsRepository {
     suspend fun getAccount(): Flow<Account?>
 
     suspend fun updateUsername(newUsername: String)
+
+    fun getAuthException(): LiveData<Unit>
 }
