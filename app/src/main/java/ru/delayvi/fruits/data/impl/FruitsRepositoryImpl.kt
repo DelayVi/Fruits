@@ -1,5 +1,7 @@
 package ru.delayvi.fruits.data.impl
 
+import dagger.hilt.components.SingletonComponent
+import it.czerwinski.android.hilt.annotations.BoundTo
 import kotlinx.coroutines.flow.*
 import ru.delayvi.fruits.data.database.fruits.AccountsFruitsSettingsDbEntity
 import ru.delayvi.fruits.data.database.fruits.FruitsDao
@@ -7,8 +9,10 @@ import ru.delayvi.fruits.domain.accounts.AccountsRepository
 import ru.delayvi.fruits.domain.fruits.FruitsRepository
 import ru.delayvi.fruits.domain.fruits.entity.Fruit
 import ru.delayvi.fruits.domain.fruits.entity.FruitSettings
+import javax.inject.Inject
 
-class FruitsRepositoryImpl(
+@BoundTo(supertype = FruitsRepository::class, component = SingletonComponent::class)
+class FruitsRepositoryImpl @Inject constructor(
     private val accountsRepository: AccountsRepository,
     private val fruitsDao: FruitsDao
 ) : FruitsRepository {

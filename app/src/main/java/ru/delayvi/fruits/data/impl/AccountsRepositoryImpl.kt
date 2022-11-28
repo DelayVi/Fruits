@@ -3,6 +3,9 @@ package ru.delayvi.fruits.data.impl
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import dagger.hilt.components.SingletonComponent
+import it.czerwinski.android.hilt.annotations.Bound
+import it.czerwinski.android.hilt.annotations.BoundTo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -15,9 +18,10 @@ import ru.delayvi.fruits.domain.accounts.AccountsRepository
 import ru.delayvi.fruits.domain.accounts.entity.Account
 import ru.delayvi.fruits.domain.accounts.entity.SignUpData
 import java.lang.Exception
+import javax.inject.Inject
 
-@Suppress("UNREACHABLE_CODE")
-class AccountsRepositoryImpl(
+@BoundTo(supertype = AccountsRepository::class, component = SingletonComponent::class)
+class AccountsRepositoryImpl @Inject constructor(
     private val accountsDao: AccountsDao,
     private val appSettings: AppSettings
 ) : AccountsRepository {
