@@ -35,8 +35,10 @@ class AccountsRepositoryImpl @Inject constructor(
 
     override suspend fun signIn(email: String, password: String) {
         delay(1000)
-        val accountId = findAccountIdByEmailAndPassword(email, password)
-        if (accountId != NO_LOGGED_IN_ACCOUNT_ID) appSettings.setCurrentAccountId(accountId)
+        accountsDao.findByEmail(email).let {
+            if (it.password != password) authException.value = Unit
+            else appSettings.setCurrentAccountId(it.id)
+        }
     }
 
     override suspend fun signUp(signUpData: SignUpData) {
@@ -66,12 +68,5 @@ class AccountsRepositoryImpl @Inject constructor(
 
     override fun getAuthException(): LiveData<Unit> = authException
 
-    private suspend fun findAccountIdByEmailAndPassword(email: String, password: String): Long {
-        accountsDao.findByEmail(email).let {
-            if (it.password != password) authException.value = Unit
-            return it.id
-        }
-        authException.value = Unit
-        return NO_LOGGED_IN_ACCOUNT_ID
-    }
+
 }
