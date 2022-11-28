@@ -1,12 +1,17 @@
 buildscript {
+    ext.hilt_ext = "1.3.0-RC1"
+    ext.hilt_version = "2.42"
+    ext.nav_version = "2.5.2"
+    ext.room_version = "2.4.3"
+    ext.lifecycle_version = "2.5.1"
     repositories {
 
         mavenCentral()  // Maven Central repository
 
     }
     dependencies {
-        def nav_version = "2.5.2"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 
