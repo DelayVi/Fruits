@@ -3,6 +3,7 @@
     <dimen name="big_width">280dp</dimen>
     <dimen name="medium_space">14dp</dimen>
     <dimen name="large_space">36dp</dimen>
+    <dimen name="progress_bar">150dp</dimen>
 
     <dimen name="fruitboard_item_stroke_width">4dp</dimen>
     <dimen name="fruitboard_item_corner_radius">8dp</dimen>

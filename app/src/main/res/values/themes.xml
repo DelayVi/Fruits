@@ -32,11 +32,10 @@
         <item name="android:layout_height">@dimen/fruitboard_item_height</item>
     </style>
 
-    <style name="SplashActivity" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
+<!--    <style name="MainActivity" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+<!--        <item name="android:windowBackground">@drawable/splash</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--    </style>-->
 
     <style name="ProfileHintTextView">
         <item name="android:layout_width">wrap_content</item>
@@ -72,6 +71,11 @@
 
     <style name="BaseTextHint">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Base.Widget.AppCompat.ProgressBar.Splash">
+        <item name="android:layout_width">@dimen/progress_bar</item>
+        <item name="android:layout_height">@dimen/progress_bar</item>
     </style>
 
     <style name="TitleTextView" parent="BaseTextHint">
