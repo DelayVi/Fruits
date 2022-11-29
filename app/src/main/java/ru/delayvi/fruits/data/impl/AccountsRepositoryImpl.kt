@@ -1,5 +1,7 @@
 package ru.delayvi.fruits.data.impl
 
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -14,6 +16,7 @@ import ru.delayvi.fruits.data.database.accounts.AccountsDao
 import ru.delayvi.fruits.data.database.accounts.UpdateUsernameTuple
 import ru.delayvi.fruits.data.settings.AppSettings
 import ru.delayvi.fruits.data.settings.AppSettings.Companion.NO_LOGGED_IN_ACCOUNT_ID
+import ru.delayvi.fruits.domain.accounts.AccountAlreadyExistException
 import ru.delayvi.fruits.domain.accounts.AccountsRepository
 import ru.delayvi.fruits.domain.accounts.entity.Account
 import ru.delayvi.fruits.domain.accounts.entity.SignUpData
@@ -26,7 +29,7 @@ class AccountsRepositoryImpl @Inject constructor(
     private val appSettings: AppSettings
 ) : AccountsRepository {
 
-    private val authException = MutableLiveData<Unit>()
+    private val authException = MutableLiveData<String>()
 
     override suspend fun isSignedIn(): Boolean {
         delay(1000)
@@ -36,21 +39,27 @@ class AccountsRepositoryImpl @Inject constructor(
     override suspend fun signIn(email: String, password: String) {
         delay(1000)
         accountsDao.findByEmail(email).let {
-            if (it.password != password) authException.value = Unit
-            else appSettings.setCurrentAccountId(it.id)
+            if (it == null) authException.value = "Аккаунт с таким email не найден"
+            else {
+                if (it.password != password) authException.value = "Неверный пароль"
+                else appSettings.setCurrentAccountId(it.id)
+            }
         }
     }
 
     override suspend fun signUp(signUpData: SignUpData) {
         delay(1000)
-        if (signUpData.password == signUpData.confirmPassword) {
+        try {
             val entity = AccountDbEntity.fromSignUpData(signUpData)
             accountsDao.createAccount(entity)
-        } else authException.value = Unit
+        } catch (e: SQLiteConstraintException) {
+            val exception = AccountAlreadyExistException()
+            exception.initCause(e)
+            throw exception
+        }
     }
 
     override suspend fun logout() {
-        delay(1000)
         appSettings.setCurrentAccountId(NO_LOGGED_IN_ACCOUNT_ID)
     }
 
@@ -66,7 +75,7 @@ class AccountsRepositoryImpl @Inject constructor(
         accountsDao.updateUsername(UpdateUsernameTuple(accountId, newUsername))
     }
 
-    override fun getAuthException(): LiveData<Unit> = authException
+    override fun getAuthException(): MutableLiveData<String> = authException
 
 
 }

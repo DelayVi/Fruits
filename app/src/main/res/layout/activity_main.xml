@@ -8,23 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity">
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/red">
-    <TextView
-        android:id="@+id/usernameTextView"
-        android:layout_width="120dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:gravity="end"
-        android:lines="1"
-        android:textColor="@color/white"
-        android:layout_marginEnd="16dp"
-        tools:text=" @username"/>
-
-</androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"

@@ -6,29 +6,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.delayvi.fruits.R
+import ru.delayvi.fruits.databinding.FragmentSignInBinding
+import ru.delayvi.fruits.databinding.FragmentSignUpBinding
+import ru.delayvi.fruits.domain.accounts.entity.SignUpData
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SignUpFragment()
-    }
+    private val viewModel by viewModels<SignUpViewModel>()
 
-    private lateinit var viewModel: SignUpViewModel
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding: FragmentSignUpBinding
+        get() = _binding ?: throw RuntimeException("FragmentSignUpBinding == null")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        launchObservers()
+
+        binding.createAccountButton.setOnClickListener {
+            with(binding) {
+                val username = usernameEditText.text.toString()
+                val email = emailEditText.text.toString()
+                val password = passwordEditText.text.toString()
+                val confirmPassword = repeatPasswordEditText.text.toString()
+                viewModel.signUp(SignUpData(username, email, password, confirmPassword))
+            }
+        }
+
+    }
+
+    private fun launchObservers(){
+        viewModel.isBlankFieldException.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.passwordsEqualsException.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Пароли не совпадают", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.signUpException.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.readyToBackInSignInFragment.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "Аккаунт успешно зарегистрирован", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
+        }
     }
 
 }

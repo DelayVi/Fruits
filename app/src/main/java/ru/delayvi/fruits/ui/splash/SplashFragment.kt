@@ -1,22 +1,17 @@
 package ru.delayvi.fruits.ui.splash
 
-import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
-import ru.delayvi.fruits.R
 import ru.delayvi.fruits.databinding.FragmentSplashBinding
-import ru.delayvi.fruits.ui.main.MainActivity
-import ru.delayvi.fruits.ui.main.MainActivityArgs
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
@@ -39,19 +34,24 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.isSignedIn.observe(viewLifecycleOwner){
+        viewModel.isSignedIn.observe(viewLifecycleOwner) {
             if (it != null) {
-                launchMainActivity(it)
-            }
-            else launchMainActivity(false)
+                launchNextDestination(it)
+            } else launchNextDestination(false)
         }
     }
 
-    private fun launchMainActivity(isSignedIn: Boolean) {
-        val intent = Intent(requireContext(), MainActivity::class.java)
 
-        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainActivity(isSignedIn))
-        //startActivity(intent)
+    private fun launchNextDestination(isSignedIn: Boolean) {
+
+        if (isSignedIn) {
+            viewModel.getAccount()
+            viewModel.account.observe(viewLifecycleOwner) {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToTabsFragment(it))
+            }
+        } else {
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToSignInFragment())
+        }
     }
 
 
