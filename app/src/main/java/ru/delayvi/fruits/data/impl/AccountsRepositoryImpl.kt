@@ -32,7 +32,7 @@ class AccountsRepositoryImpl @Inject constructor(
     private val authException = MutableLiveData<String>()
 
     override suspend fun isSignedIn(): Boolean {
-        delay(1000)
+        delay(2000)
         return appSettings.getCurrentAccountId() != NO_LOGGED_IN_ACCOUNT_ID
     }
 
@@ -64,13 +64,12 @@ class AccountsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAccount(): Flow<Account?> {
-        delay(1000)
         val accountId = appSettings.getCurrentAccountId()
         return accountsDao.getById(accountId).map { it?.toAccount() }
     }
 
     override suspend fun updateUsername(newUsername: String) {
-        delay(1000)
+        delay(1500)
         val accountId = appSettings.getCurrentAccountId()
         accountsDao.updateUsername(UpdateUsernameTuple(accountId, newUsername))
     }

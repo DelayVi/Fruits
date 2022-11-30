@@ -38,17 +38,36 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
-            logout()
-
+        with(binding) {
+            viewModel.currentAccount.observe(viewLifecycleOwner) {
+                emailTextView.text = it.email
+                usernameTextView.text = it.username
+                createdAtTextView.text = "01/01/1970"
+            }
+            logoutButton.setOnClickListener {
+                viewModel.logout()
+                logout()
+            }
+            editProfileButton.setOnClickListener {
+                launchEditUsernameDestination()
+            }
         }
     }
 
-    private fun logout() {
-        val topLevelHost =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment?
-        topLevelHost?.navController?.navigate(R.id.signInFragment)
+    private fun launchEditUsernameDestination() {
+        val destinationId = R.id.editUsernameFragment
+        topLevelHostNavigate(destinationId)
+    }
 
+    private fun logout() {
+        val destinationId = R.id.signInFragment
+        topLevelHostNavigate(destinationId)
+    }
+
+    private fun topLevelHostNavigate(destinationId: Int) {
+        val topLevelHost =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+                    as NavHostFragment?
+        topLevelHost?.navController?.navigate(destinationId)
     }
 }

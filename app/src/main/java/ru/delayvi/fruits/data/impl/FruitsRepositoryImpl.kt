@@ -32,10 +32,6 @@ class FruitsRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun getFruitById(id: Long): Fruit {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun activateFruit(fruit: Fruit) {
         changeFlagFruitActivation(fruit, true)
     }
