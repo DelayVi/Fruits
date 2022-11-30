@@ -38,7 +38,10 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.authException.observe(viewLifecycleOwner) {
-            toastAuthException(it)
+            toastAuthException(it.toString())
+        }
+        viewModel.account.observe(viewLifecycleOwner) {
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToTabsFragment(it))
         }
 
         with(binding) {
@@ -57,7 +60,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun toastAuthException(exception: String) {
-            Toast.makeText(requireContext(), exception, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), exception, Toast.LENGTH_SHORT).show()
     }
 
 }
