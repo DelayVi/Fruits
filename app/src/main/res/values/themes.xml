@@ -27,16 +27,6 @@
     </style>
 
 
-    <style name="DefaultFruitButtonItemStyle">
-        <item name="android:layout_width">@dimen/fruitboard_item_width</item>
-        <item name="android:layout_height">@dimen/fruitboard_item_height</item>
-    </style>
-
-<!--    <style name="MainActivity" parent="Theme.MaterialComponents.Light.NoActionBar">-->
-<!--        <item name="android:windowBackground">@drawable/splash</item>-->
-<!--        <item name="android:windowFullscreen">true</item>-->
-<!--    </style>-->
-
     <style name="ProfileHintTextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -83,5 +73,10 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CardView.ItemFruit">
+        <item name="cardUseCompatPadding">true</item>
+        <item name="contentPadding">16dp</item>
     </style>
 </resources>

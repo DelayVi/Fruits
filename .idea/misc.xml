@@ -4,19 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/drawable-v24/ic_dashboard.xml" value="0.2505" />
+        <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/drawable-v24/ic_fruitboard.xml" value="0.2025" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/drawable-v24/ic_settings.xml" value="0.2505" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/drawable/splash.xml" value="0.2505" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_edit_username.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_fruit.xml" value="0.3625" />
-        <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_fruitboard.xml" value="0.30028735632183906" />
+        <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_fruitboard.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_profile.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_settings.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_sign_in.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_sign_up.xml" value="0.3625" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_splash.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/fragment_tabs.xml" value="0.3625" />
+        <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/item_fruit.xml" value="0.33" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/layout/item_settings.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/withf/AndroidStudioProjects/Fruits/app/src/main/res/menu/tabs_menu.xml" value="0.3625" />
       </map>
