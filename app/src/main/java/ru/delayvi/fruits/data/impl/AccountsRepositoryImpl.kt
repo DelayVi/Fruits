@@ -18,6 +18,7 @@ import ru.delayvi.fruits.data.settings.AppSettings
 import ru.delayvi.fruits.data.settings.AppSettings.Companion.NO_LOGGED_IN_ACCOUNT_ID
 import ru.delayvi.fruits.domain.accounts.AccountAlreadyExistException
 import ru.delayvi.fruits.domain.accounts.AccountsRepository
+import ru.delayvi.fruits.domain.accounts.AuthException
 import ru.delayvi.fruits.domain.accounts.entity.Account
 import ru.delayvi.fruits.domain.accounts.entity.SignUpData
 import java.lang.Exception
@@ -38,13 +39,18 @@ class AccountsRepositoryImpl @Inject constructor(
 
     override suspend fun signIn(email: String, password: String) {
         delay(1000)
-        accountsDao.findByEmail(email).let {
-            if (it == null) authException.value = "Аккаунт с таким email не найден"
-            else {
-                if (it.password != password) authException.value = "Неверный пароль"
-                else appSettings.setCurrentAccountId(it.id)
+        try {
+            accountsDao.findByEmail(email).let {
+                if (it == null) throw AuthException()
+                    if (it.password != password) throw AuthException()
+                    else appSettings.setCurrentAccountId(it.id)
             }
+        }catch (e: SQLiteConstraintException) {
+            val exception = AuthException()
+            exception.initCause(e)
+            throw exception
         }
+
     }
 
     override suspend fun signUp(signUpData: SignUpData) {
@@ -74,7 +80,6 @@ class AccountsRepositoryImpl @Inject constructor(
         accountsDao.updateUsername(UpdateUsernameTuple(accountId, newUsername))
     }
 
-    override fun getAuthException(): MutableLiveData<String> = authException
 
 
 }

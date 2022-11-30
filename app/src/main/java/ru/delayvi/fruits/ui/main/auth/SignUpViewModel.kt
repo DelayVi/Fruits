@@ -1,6 +1,5 @@
 package ru.delayvi.fruits.ui.main.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,15 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.delayvi.fruits.domain.accounts.AccountAlreadyExistException
 import ru.delayvi.fruits.domain.accounts.entity.SignUpData
-import ru.delayvi.fruits.domain.accounts.usecases.GetAuthException
 import ru.delayvi.fruits.domain.accounts.usecases.SignUpUseCase
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val getAuthException: GetAuthException,
     ) : ViewModel() {
 
     private val _signUpException = MutableLiveData<String>()

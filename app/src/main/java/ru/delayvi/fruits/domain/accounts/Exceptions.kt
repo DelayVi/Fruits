@@ -4,4 +4,4 @@ open class AccountsExceptions: RuntimeException()
 
 class AccountAlreadyExistException: AccountsExceptions()
 
-class InvalidPasswordException: AccountsExceptions()
+class AuthException: AccountsExceptions()

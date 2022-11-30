@@ -38,9 +38,7 @@ class SplashViewModel @Inject constructor(
     fun getAccount() {
         viewModelScope.async {
             val accountFlow = getAccountUseCase()
-            Log.d("MyLog", "accountFlow ${accountFlow.first()}")
             _account.value = accountFlow.first()
-            Log.d("MyLog", "_account ${_account.value}")
             return@async accountFlow.first()
         }
     }

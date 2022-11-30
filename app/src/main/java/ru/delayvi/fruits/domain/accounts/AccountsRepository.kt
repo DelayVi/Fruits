@@ -19,6 +19,4 @@ interface AccountsRepository {
     suspend fun getAccount(): Flow<Account?>
 
     suspend fun updateUsername(newUsername: String)
-
-    fun getAuthException(): MutableLiveData<String>
 }
