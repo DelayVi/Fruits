@@ -8,26 +8,29 @@
     tools:context=".ui.main.tabs.TabsFragment"
     >
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:title="Name"
+        app:titleTextColor="@color/white"
         android:background="@color/red">
         <TextView
             android:id="@+id/usernameTextView"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:gravity="end"
             android:lines="1"
+            android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_marginEnd="16dp"
             tools:text=" @username"/>
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/tabsContainer"

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,8 +41,9 @@ class SignInFragment : Fragment() {
         viewModel.authException.observe(viewLifecycleOwner) {
             toastAuthException(it.toString())
         }
-        viewModel.account.observe(viewLifecycleOwner) {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToTabsFragment(it))
+
+        viewModel.successAuth.observe(viewLifecycleOwner) {
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToTabsFragment())
         }
 
         with(binding) {
@@ -53,7 +55,16 @@ class SignInFragment : Fragment() {
                 navigateToSignUpDestination()
             }
         }
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        }
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
+
 
     private fun navigateToSignUpDestination() {
         findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
