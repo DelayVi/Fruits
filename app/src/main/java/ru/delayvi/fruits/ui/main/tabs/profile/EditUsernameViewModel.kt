@@ -17,6 +17,7 @@ class EditUsernameViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _showProgressBar = MutableLiveData<Boolean>()
+        .apply { value = false }
     val showProgressBar: LiveData<Boolean>
         get() = _showProgressBar
 

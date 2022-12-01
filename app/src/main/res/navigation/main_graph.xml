@@ -41,9 +41,6 @@
         <action
             android:id="@+id/action_tabsFragment_to_editUsernameFragment"
             app:destination="@id/editUsernameFragment" />
-        <argument
-            android:name="account"
-            app:argType="ru.delayvi.fruits.domain.accounts.entity.Account" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

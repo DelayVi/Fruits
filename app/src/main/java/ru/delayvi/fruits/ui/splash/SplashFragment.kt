@@ -45,10 +45,7 @@ class SplashFragment : Fragment() {
     private fun launchNextDestination(isSignedIn: Boolean) {
 
         if (isSignedIn) {
-            viewModel.getAccount()
-            viewModel.account.observe(viewLifecycleOwner) {
-                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToTabsFragment(it))
-            }
+            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToTabsFragment())
         } else {
             findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToSignInFragment())
         }

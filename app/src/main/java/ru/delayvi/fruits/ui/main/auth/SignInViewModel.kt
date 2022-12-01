@@ -18,34 +18,26 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
-    private val getAccountUseCase: GetAccountUseCase
 ) : ViewModel() {
 
     private val _authException = MutableLiveData<Unit>()
     val authException: LiveData<Unit>
         get() = _authException
 
-    private val _account = MutableLiveData<Account>()
-    val account: LiveData<Account>
-        get() = _account
+    private val _successAuth = MutableLiveData<Unit>()
+    val successAuth: LiveData<Unit>
+        get() = _successAuth
+
 
     fun signIn(email: String, password: String) {
         viewModelScope.launch {
             try {
                 signInUseCase(email, password)
-                getAccount()
             } catch (e: AuthException) {
                 _authException.value = Unit
             }
         }
     }
 
-    fun getAccount() {
-        viewModelScope.async {
-            val accountFlow = getAccountUseCase()
-            _account.value = accountFlow.first()
-            return@async accountFlow.first()
-        }
-    }
 
 }

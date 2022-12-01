@@ -25,26 +25,10 @@ class SplashViewModel @Inject constructor(
     val isSignedIn: LiveData<Boolean?>
     get() = _isSignedIn
 
-    private val _account = MutableLiveData<Account>()
-    val account: LiveData<Account>
-    get() = _account
-
     init {
         viewModelScope.launch {
             _isSignedIn.value = isSignedInUseCase()
         }
-    }
-
-    fun getAccount() {
-        viewModelScope.async {
-            val accountFlow = getAccountUseCase()
-            _account.value = accountFlow.first()
-            return@async accountFlow.first()
-        }
-    }
-
-     suspend fun isUser(): Boolean {
-      return  isSignedInUseCase()
     }
 
 }
