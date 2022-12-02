@@ -26,11 +26,6 @@ class TabsViewModel @Inject constructor(
     private val _account = MutableStateFlow<Account?>(null)
     val account: StateFlow<Account?> = _account.asStateFlow()
 
-    private val _destinationTitle = MutableLiveData(Unit)
-    val destinationTitle: LiveData<Unit>
-        get() = _destinationTitle
-
-
     fun getAccount() {
         viewModelScope.launch {
             val accountFlow = getAccountUseCase()
@@ -39,14 +34,6 @@ class TabsViewModel @Inject constructor(
                     _account.value = it
                 }
             }
-        }
-    }
-
-    fun getDestinationTitle() {
-        viewModelScope.launch {
-                _destinationTitle.value = Unit
-            delay(1000)
-                //  Log.d("MyLog", "destination title updated $it")
         }
     }
 

@@ -33,6 +33,7 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 signInUseCase(email, password)
+                _successAuth.value = Unit
             } catch (e: AuthException) {
                 _authException.value = Unit
             }

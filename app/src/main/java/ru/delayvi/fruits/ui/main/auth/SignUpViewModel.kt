@@ -32,14 +32,21 @@ class SignUpViewModel @Inject constructor(
     val readyToBackInSignInFragment: LiveData<Unit>
         get() = _readyToBackInSignInFragment
 
+    private val _showProgressBar = MutableLiveData<Boolean>()
+        .apply { value = false }
+    val showProgressBar: LiveData<Boolean>
+        get() = _showProgressBar
+
     fun signUp(signUpData: SignUpData) {
         viewModelScope.launch {
-            try{
+            try{ _showProgressBar.value = true
                 if (fieldValidation(signUpData)) {
                     signUpUseCase(signUpData)
                     _readyToBackInSignInFragment.value = Unit
+                    _showProgressBar.value = false
                 }
             }catch (e:AccountAlreadyExistException) {
+                _showProgressBar.value = false
                 _signUpException.value = "Account already exist"
             }
         }
@@ -61,10 +68,12 @@ class SignUpViewModel @Inject constructor(
 
     private fun throwIsBlankFieldException() {
         _isBlankFieldException.value = Unit
+        _showProgressBar.value = false
     }
 
     private fun throwPasswordsNotEquals() {
         _passwordsEqualsException.value = Unit
+        _showProgressBar.value = false
     }
 
 

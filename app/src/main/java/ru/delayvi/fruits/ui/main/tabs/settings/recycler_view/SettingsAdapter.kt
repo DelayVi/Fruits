@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.delayvi.fruits.databinding.ItemSettingsBinding
+import ru.delayvi.fruits.domain.fruits.entity.Fruit
 import ru.delayvi.fruits.domain.fruits.entity.FruitSettings
 
 class SettingsAdapter: ListAdapter<FruitSettings, SettingsViewHolder>(SettingsDiffUtilItemCallback()) {
 
+    var onClickListener: ((FruitSettings) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsViewHolder {
         val binding = ItemSettingsBinding.inflate(
@@ -30,6 +32,7 @@ class SettingsAdapter: ListAdapter<FruitSettings, SettingsViewHolder>(SettingsDi
                 binding.settingsCheckBox.isChecked = selectedCheckBox.isActive
                 binding.settingsCheckBox.tag = selectedCheckBox
             }
+            itemView.setOnClickListener { onClickListener?.invoke(selectedCheckBox) }
         }
     }
 
