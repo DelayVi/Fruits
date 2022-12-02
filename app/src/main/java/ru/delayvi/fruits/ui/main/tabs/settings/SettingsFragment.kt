@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import ru.delayvi.fruits.R
 import ru.delayvi.fruits.databinding.FragmentSettingsBinding
 import ru.delayvi.fruits.databinding.FragmentTabsBinding
@@ -22,7 +25,7 @@ import ru.delayvi.fruits.ui.splash.SplashViewModel
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
-    private val viewModel by viewModels<SplashViewModel>()
+    private val viewModel by viewModels<SettingsViewModel>()
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding: FragmentSettingsBinding
@@ -43,21 +46,14 @@ class SettingsFragment : Fragment() {
 
         binding.settingsList.adapter = settingsAdapter
 
-        val test = listOf(
-            FruitSettings(Fruit(1, "Apple"), true),
-            FruitSettings(Fruit(2, "Mango"), true),
-            FruitSettings(Fruit(3, "Blackberry"), true),
-            FruitSettings(Fruit(4, "Pineapple"), false),
-            FruitSettings(Fruit(5, "Dragon"), true),
-            FruitSettings(Fruit(6, "Blueberry"), true),
-            FruitSettings(Fruit(7, "Raspberry"), true),
-            FruitSettings(Fruit(8, "Cherry"), true),
-            FruitSettings(Fruit(9, "Lichi"), false),
-            FruitSettings(Fruit(10, "Orange"), true),
-            FruitSettings(Fruit(11, "Lemon"), true),
-            FruitSettings(Fruit(12, "Lime"), true)
-        )
-        settingsAdapter.submitList(test)
+        viewModel.fruitSettings.onEach {
+            settingsAdapter.submitList(it)
+        }
+            .launchIn(lifecycleScope)
+
+        settingsAdapter.onClickListener = {
+            viewModel.changeFruitActivation(it)
+        }
     }
 
 }

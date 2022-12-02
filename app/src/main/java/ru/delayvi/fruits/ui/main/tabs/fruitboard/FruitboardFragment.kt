@@ -10,8 +10,11 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import ru.delayvi.fruits.R
 import ru.delayvi.fruits.databinding.FragmentFruitboardBinding
 import ru.delayvi.fruits.databinding.FragmentSignInBinding
@@ -41,25 +44,11 @@ class FruitboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fruits.observe(viewLifecycleOwner) {
-
-        }
         binding.fruitBoardRecyclerView.adapter = fruitboardAdapter
-        val test = listOf<Fruit>(
-            Fruit(1, "Apple"),
-            Fruit(2, "Mango"),
-            Fruit(3, "Blackberry"),
-            Fruit(4, "Pineapple"),
-            Fruit(5, "Dragon"),
-            Fruit(6, "Blueberry"),
-            Fruit(7, "Raspberry"),
-            Fruit(8, "Cherry"),
-            Fruit(9, "Lichi"),
-            Fruit(10, "Orange"),
-            Fruit(11, "Lemon"),
-            Fruit(12, "Lime")
-        )
-        fruitboardAdapter.submitList(test)
+
+        viewModel.fruits.onEach {
+            fruitboardAdapter.submitList(it)
+        }.launchIn(lifecycleScope)
 
         fruitboardAdapter.onClickListener = {
             findNavController().navigate(
