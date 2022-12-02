@@ -48,28 +48,8 @@ class FruitsRepositoryImpl @Inject constructor(
         changeFlagFruitActivation(fruit, false)
     }
 
-    override suspend fun getAllFruits(): MutableStateFlow<List<Fruit>> {
-        getFruitList()
-        if (fruits.value == listOf<Any>()) {
-            updateFruitList()
-            getFruitList()
-        }
-        return fruits
-    }
-
-    private suspend fun updateFruitList() {
-        fruitsApi.getAllFruits().map { fruitsDao.loadFruit(it.toFruitDbEntity()) }
-    }
-
-    private suspend fun getFruitList() {
-        val fruitList = fruitsDao.getAllFruits().map {
-            it.toFruit()
-        }
-        fruits.value = fruitList
-    }
-
-
-    private fun queryFruitsAndSettings(accountId: Long): Flow<List<FruitSettings>> {
+    private suspend fun queryFruitsAndSettings(accountId: Long): Flow<List<FruitSettings>> {
+        getAllFruits()
         return fruitsDao.getFruitsAndSettings(accountId).map { entity ->
             entity.map {
                 Log.d("MyLog", it.toString())
@@ -92,5 +72,24 @@ class FruitsRepositoryImpl @Inject constructor(
                 )
             }
         }
+    }
+
+    private suspend fun getAllFruits() {
+        getFruitList()
+        if (fruits.value == emptyList<Any>()) {
+            updateFruitList()
+            getFruitList()
+        }
+    }
+
+    private suspend fun updateFruitList() {
+        fruitsApi.getAllFruits().map { fruitsDao.loadFruit(it.toFruitDbEntity()) }
+    }
+
+    private suspend fun getFruitList() {
+        val fruitList = fruitsDao.getAllFruits().map {
+            it.toFruit()
+        }
+        fruits.value = fruitList
     }
 }

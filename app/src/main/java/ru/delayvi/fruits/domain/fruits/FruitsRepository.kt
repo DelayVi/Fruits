@@ -14,6 +14,4 @@ interface FruitsRepository {
 
     suspend fun deactivateFruit(fruit: Fruit)
 
-    suspend fun getAllFruits(): MutableStateFlow<List<Fruit>>
-
 }

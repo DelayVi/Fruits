@@ -55,6 +55,11 @@ class SignUpFragment : Fragment() {
             Toast.makeText(requireContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show()
         }
 
+        viewModel.showProgressBar.observe(viewLifecycleOwner){
+            binding.progressBar.visibility = if (it)  View.VISIBLE
+            else View.GONE
+        }
+
         viewModel.passwordsEqualsException.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "Пароли не совпадают", Toast.LENGTH_SHORT).show()
         }
