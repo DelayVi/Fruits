@@ -25,14 +25,4 @@ class FruitboardViewModel @Inject constructor(
             }
         }
     }
-
-    fun testAddFruits() {
-        val test = listOf<Fruit>(
-            Fruit(1, "apple"),
-            Fruit(2,"Mango"),
-            Fruit(3, "blackberry")
-        )
-
-        _fruits.value = test
-    }
 }

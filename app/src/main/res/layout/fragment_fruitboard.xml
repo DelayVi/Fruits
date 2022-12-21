@@ -24,13 +24,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/noBoxesTextView"
+        android:id="@+id/noFruitsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/no_fruits"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:visibility="gone" />
 </FrameLayout>
 </layout>

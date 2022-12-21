@@ -1,4 +1,4 @@
-package ru.delayvi.fruits.data.network
+package ru.delayvi.fruits.data.network.entity
 
 import ru.delayvi.fruits.domain.fruits.entity.Nutritions
 

@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.delayvi.fruits.domain.fruits.entity.Fruit
 import ru.delayvi.fruits.domain.fruits.entity.FruitSettings
+import ru.delayvi.fruits.domain.fruits.entity.Nutritions
 
 interface FruitsRepository {
 
@@ -13,5 +14,7 @@ interface FruitsRepository {
     suspend fun activateFruit(fruit: Fruit)
 
     suspend fun deactivateFruit(fruit: Fruit)
+
+    suspend fun getNutritions(fruitName: String): Nutritions
 
 }

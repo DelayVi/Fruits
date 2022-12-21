@@ -52,7 +52,7 @@ class SignUpFragment : Fragment() {
 
     private fun launchObservers(){
         viewModel.isBlankFieldException.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "Не все поля заполнены", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.fields_is_blank), Toast.LENGTH_SHORT).show()
         }
 
         viewModel.showProgressBar.observe(viewLifecycleOwner){
@@ -61,7 +61,11 @@ class SignUpFragment : Fragment() {
         }
 
         viewModel.passwordsEqualsException.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "Пароли не совпадают", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.passwords_is_not_equals), Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.invalidEmailException.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
         }
 
         viewModel.signUpException.observe(viewLifecycleOwner) {
@@ -69,7 +73,7 @@ class SignUpFragment : Fragment() {
         }
 
         viewModel.readyToBackInSignInFragment.observe(viewLifecycleOwner){
-            Toast.makeText(requireContext(), "Аккаунт успешно зарегистрирован", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.account_successfully_registred), Toast.LENGTH_SHORT).show()
             findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
         }
     }

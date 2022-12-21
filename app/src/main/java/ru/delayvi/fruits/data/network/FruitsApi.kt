@@ -1,13 +1,17 @@
 package ru.delayvi.fruits.data.network
 
 import retrofit2.http.GET
-import ru.delayvi.fruits.domain.fruits.entity.Fruit
+import retrofit2.http.Path
+import retrofit2.http.Query
+import ru.delayvi.fruits.data.network.entity.FruitNetworkEntity
 
 interface FruitsApi {
 
-    @GET("all")
+    @GET("fruit/all")
     suspend fun getAllFruits(): List<FruitNetworkEntity>
 
-    @GET("apple")
-    suspend fun getFruit(fruitName: String): FruitNetworkEntity
+    @GET("fruit/{fruitName}")
+    suspend fun getFruit(
+        @Path("fruitName") fruitName: String
+    ): FruitNetworkEntity
 }

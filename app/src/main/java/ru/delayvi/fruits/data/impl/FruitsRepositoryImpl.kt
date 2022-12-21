@@ -14,6 +14,7 @@ import ru.delayvi.fruits.domain.accounts.AccountsRepository
 import ru.delayvi.fruits.domain.fruits.FruitsRepository
 import ru.delayvi.fruits.domain.fruits.entity.Fruit
 import ru.delayvi.fruits.domain.fruits.entity.FruitSettings
+import ru.delayvi.fruits.domain.fruits.entity.Nutritions
 import javax.inject.Inject
 
 @BoundTo(supertype = FruitsRepository::class, component = SingletonComponent::class)
@@ -48,11 +49,14 @@ class FruitsRepositoryImpl @Inject constructor(
         changeFlagFruitActivation(fruit, false)
     }
 
+    override suspend fun getNutritions(fruitName: String): Nutritions {
+        return  fruitsApi.getFruit(fruitName).toNutritions()
+    }
+
     private suspend fun queryFruitsAndSettings(accountId: Long): Flow<List<FruitSettings>> {
         getAllFruits()
         return fruitsDao.getFruitsAndSettings(accountId).map { entity ->
             entity.map {
-                Log.d("MyLog", it.toString())
                 val fruit = it.key
                 val settings = it.value
                 FruitSettings(fruit.toFruit(), settings == null || settings.isActive)

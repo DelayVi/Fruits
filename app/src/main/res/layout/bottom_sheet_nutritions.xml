@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="nutritions"
+            type="ru.delayvi.fruits.domain.fruits.entity.Nutritions" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@android:color/transparent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/proteinHintTextView"
+                    style="@style/NutritionsHintTextView"
+                    android:text="@string/proteins"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fatHintTextView"
+                    style="@style/NutritionsHintTextView"
+                    android:text="@string/fats"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/proteinHintTextView" />
+
+                <TextView
+                    android:id="@+id/carbohydratesHintTextView"
+                    style="@style/NutritionsHintTextView"
+                    android:text="@string/Carbohydrates"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fatHintTextView" />
+
+                <TextView
+                    android:id="@+id/sugarHintTextView"
+                    style="@style/NutritionsHintTextView"
+                    android:text="@string/sugar"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/carbohydratesHintTextView" />
+
+                <TextView
+                    android:id="@+id/caloriesHintTextView"
+                    style="@style/NutritionsHintTextView"
+                    android:text="@string/calories"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sugarHintTextView" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/startBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="proteinHintTextView,
+                fatHintTextView,
+                carbohydratesHintTextView,
+                sugarHintTextView,
+                caloriesHintTextView" />
+
+                <TextView
+                    android:id="@+id/proteinsTextView"
+                    style="@style/NutritionsValueTextView"
+                    app:layout_constraintStart_toStartOf="@id/startBarrier"
+                    app:layout_constraintTop_toTopOf="@id/proteinHintTextView"
+                    tools:text="20 г"
+                    app:setNutritionsToBottomSheet="@{nutritions.protein}"/>
+
+                <TextView
+                    android:id="@+id/fatTextView"
+                    style="@style/NutritionsValueTextView"
+                    app:layout_constraintStart_toStartOf="@id/startBarrier"
+                    app:layout_constraintTop_toTopOf="@id/fatHintTextView"
+                    tools:text="6g" />
+
+                <TextView
+                    android:id="@+id/carbohydratesTextView"
+                    style="@style/NutritionsValueTextView"
+                    app:layout_constraintStart_toStartOf="@id/startBarrier"
+                    app:layout_constraintTop_toTopOf="@id/carbohydratesHintTextView"
+                    tools:text="13g" />
+
+                <TextView
+                    android:id="@+id/sugarTextView"
+                    style="@style/NutritionsValueTextView"
+                    app:layout_constraintStart_toStartOf="@id/startBarrier"
+                    app:layout_constraintTop_toTopOf="@id/sugarHintTextView"
+                    tools:text="4g" />
+
+                <TextView
+                    android:id="@+id/caloriesTextView"
+                    style="@style/NutritionsValueTextView"
+                    app:layout_constraintStart_toStartOf="@id/startBarrier"
+                    app:layout_constraintTop_toTopOf="@id/caloriesHintTextView"
+                    tools:text="134kkal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
