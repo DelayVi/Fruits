@@ -39,7 +39,7 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.authException.observe(viewLifecycleOwner) {
-            toastAuthException(it.toString())
+            toastAuthException()
         }
 
         viewModel.successAuth.observe(viewLifecycleOwner) {
@@ -56,13 +56,12 @@ class SignInFragment : Fragment() {
             }
         }
 
-        val callback = object : OnBackPressedCallback(true) {
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 requireActivity().finish()
             }
         }
-
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, onBackPressedCallback)
     }
 
 
@@ -70,8 +69,8 @@ class SignInFragment : Fragment() {
         findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
     }
 
-    private fun toastAuthException(exception: String) {
-        Toast.makeText(requireContext(), exception, Toast.LENGTH_SHORT).show()
+    private fun toastAuthException() {
+        Toast.makeText(requireContext(), getString(R.string.invalid_login_or_password), Toast.LENGTH_SHORT).show()
     }
 
 }

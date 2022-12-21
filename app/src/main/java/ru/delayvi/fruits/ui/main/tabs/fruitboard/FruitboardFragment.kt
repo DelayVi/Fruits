@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -44,27 +45,34 @@ class FruitboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fruitBoardRecyclerView.adapter = fruitboardAdapter
 
-        viewModel.fruits.onEach {
-            fruitboardAdapter.submitList(it)
-        }.launchIn(lifecycleScope)
+        with(binding) {
 
+            binding.fruitBoardRecyclerView.adapter = fruitboardAdapter
+            viewModel.fruits.onEach {
+                if (it == emptyList<Fruit>()) {
+                    noFruitsTextView.visibility = View.VISIBLE
+                    fruitBoardRecyclerView.visibility = View.GONE
+                } else {
+                    noFruitsTextView.visibility = View.GONE
+                    fruitBoardRecyclerView.visibility = View.VISIBLE
+                }
+                fruitboardAdapter.submitList(it)
+            }.launchIn(lifecycleScope)
+        }
         fruitboardAdapter.onClickListener = {
             findNavController().navigate(
                 FruitboardFragmentDirections.actionFruitboardFragmentToFruitFragment(it.id, it.fruitName)
             )
         }
 
-    }
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
-    private val fruitClickListener = View.OnClickListener {
-        val fruit = it.tag as Fruit
-        val direction = FruitboardFragmentDirections.actionFruitboardFragmentToFruitFragment(
-            fruit.id,
-            fruit.fruitName,
-        )
-        findNavController().navigate(direction)
     }
 
 

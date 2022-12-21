@@ -22,5 +22,14 @@
     <string name="fruitboard">Фрукты</string>
     <string name="settings">Настройки</string>
     <string name="profile">Профиль</string>
-    <string name="Invalid_login_or_password">Неправильный логин или пароль</string>
+    <string name="invalid_login_or_password">Неправильный логин или пароль</string>
+    <string name="fields_is_blank">Не все поля заполнены</string>
+    <string name="invalid_email">Неверный формат Email</string>
+    <string name="passwords_is_not_equals">Пароли не совпадают</string>
+    <string name="account_successfully_registred">Аккаунт успешно зарегистрирован</string>
+    <string name="proteins">Белки</string>
+    <string name="fats">Жиры</string>
+    <string name="Carbohydrates">Углеводы</string>
+    <string name="sugar">В том числе сахара</string>
+    <string name="calories">Всего калорий</string>
 </resources>
